@@ -19,8 +19,9 @@ form {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 100%;
+  width: 90%; /* Ensure it stays responsive on small screens */
   border: 2px solid #427859; /* Border matches brand green */
+  box-sizing: border-box; /* Include padding and border in element's width */
 }
 
 /* Title styling */
@@ -42,13 +43,14 @@ label {
 
 /* Input fields styling */
 input, textarea, select {
-  width: 100%;
+  width: calc(100% - 20px); /* Adjust for consistent padding */
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
   color: #333;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
 /* Date and time picker input styling */
