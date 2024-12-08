@@ -16,6 +16,14 @@ form.addEventListener('submit', async (event) => {
     order_date_time: dateTime,
   };
 
+flatpickr("#order-date-time", {
+  enableTime: true,
+  dateFormat: "m/d/Y, h:i K",
+  time_24hr: false, // 12-hour format
+  wrap: true,
+  theme: "custom", // Use the custom theme for green styling
+});
+  
   try {
     const response = await fetch('/.netlify/functions/submit-refund', {
       method: 'POST',
