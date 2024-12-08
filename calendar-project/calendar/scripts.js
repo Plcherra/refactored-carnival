@@ -1,50 +1,40 @@
-// Replace with your Zapier Webhook URL
-const zapierWebhookURL = "https://hooks.zapier.com/hooks/catch/20946687/2sbm12t/";
-
-document.getElementById("picker-form").addEventListener("submit", async (event) => {
+const form = document.getElementById('picker-form');
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  // Collect user inputs
-  const name = document.getElementById("name").value;
-  const location = document.getElementById("location").value;
-  const orderNumber = document.getElementById("order-number").value;
-  const refundReason = document.getElementById("refund-reason").value;
-  const datetime = document.getElementById("datetime").value;
+  const name = document.getElementById('name').value;
+  const location = document.getElementById('location').value;
+  const orderNumber = document.getElementById('order-number').value;
+  const refundReason = document.getElementById('refund-reason').value;
+  const dateTime = document.getElementById('datetime').value;
 
-  if (!name || !location || !orderNumber || !refundReason || !datetime) {
-    document.getElementById("status").textContent = "Please fill in all fields.";
-    return;
-  }
-
-  // Create the payload to send to Zapier
-  const payload = {
+  const data = {
     name,
-    order_location: location,
+    location,
     order_numbern: orderNumber,
     refund_reason: refundReason,
-    order_date_time: new Date(datetime).toISOString(), // Convert to ISO8601 format
+    order_date_time: dateTime,
   };
 
   try {
-    // Send data to Zapier
-    const response = await fetch(zapierWebhookURL, {
-      method: "POST",
+    const response = await fetch('/.netlify/functions/submit-refund', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(data),
     });
 
     if (response.ok) {
-      document.getElementById("status").textContent =
-        "Data successfully sent to Zapier!";
+      const result = await response.json();
+      alert('Data sent successfully!');
     } else {
-      document.getElementById("status").textContent =
-        "Failed to send data. Please try again.";
+      const error = await response.text();
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   } catch (error) {
-    console.error("Error:", error);
-    document.getElementById("status").textContent =
-      "An error occurred. Please try again.";
+    console.error('Fetch Error:', error);
+    alert('An error occurred. Please try again.');
   }
 });
