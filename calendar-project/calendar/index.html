@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <script defer src="scripts.js"></script>
-    </head>
-    <body>
-        <h1>Date and Time Picker with Voiceflow Integration</h1>
-        <label for="name">Username:</label>
-        <input id="name" name="name" type="text" placeholder="Your name here">
-        <label for="datetime">Select Date and Time:</label>
-        <input id="datetime" type="datetime-local">
-        <button id="send-datetime">Send Date and Time</button>
-        <ul id="root"></ul>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date and Time Picker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Date and Time Picker with Voiceflow Integration</h1>
+
+    <div class="form-container">
+      <label for="datetime">Select Date and Time:</label>
+      <input id="datetime" name="datetime" type="datetime-local" />
+
+      <button id="send" type="button">Send Date and Time</button>
+    </div>
+
+    <ul id="response"></ul>
+
+    <script src="scripts.js"></script>
+  </body>
 </html>
