@@ -1,36 +1,30 @@
-// Handle the "Send Date and Time" button click
-async function handleSend() {
-  const datetime = document.getElementById("datetime").value;
+document.getElementById("submit").addEventListener("click", async () => {
+  const datetime = document.getElementById("datetime-picker").value;
 
-  // Check if the field is filled
-  if (!datetime) {
-    alert("Please select a date and time.");
-    return;
-  }
+  // Log the selected date/time
+  console.log("Selected datetime:", datetime);
 
   try {
-    // Send the data to the backend (Netlify function)
+    // Send the request to the Netlify proxy function
     const response = await fetch("/.netlify/functions/calendar-handler", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ datetime }),
     });
 
+    // Log the response and handle the result
     const result = await response.json();
-
-    // Display the response
-    const responseList = document.getElementById("response");
     if (response.ok) {
-      responseList.innerHTML += `<li>${result.message}</li>`;
+      console.log("Voiceflow Response:", result.data);
+      alert("Date and time sent successfully!");
     } else {
-      responseList.innerHTML += `<li>Error: ${result.error}</li>`;
+      console.error("Error:", result.error);
+      alert(`Error: ${result.error}`);
     }
   } catch (error) {
-    console.error("Error:", error);
-    const responseList = document.getElementById("response");
-    responseList.innerHTML += `<li>Error sending data</li>`;
+    console.error("Unexpected Error:", error);
+    alert("Something went wrong. Please try again.");
   }
-}
-
-// Register the event listener
-document.getElementById("send").addEventListener("click", handleSend);
+});
