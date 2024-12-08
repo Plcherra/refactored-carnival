@@ -1,3 +1,37 @@
+/* Target Flatpickr styles */
+.flatpickr-calendar {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #427859; /* Green border */
+}
+
+.flatpickr-calendar .flatpickr-day {
+  color: #427859; /* Default day text color */
+}
+
+.flatpickr-calendar .flatpickr-day.selected,
+.flatpickr-calendar .flatpickr-day.today,
+.flatpickr-calendar .flatpickr-day:hover {
+  background-color: #427859; /* Highlighted background */
+  color: #ffffff; /* Highlighted text */
+}
+
+.flatpickr-calendar .flatpickr-time {
+  background-color: #ffffff; /* White background for time */
+  border: 1px solid #427859; /* Green border */
+  color: #427859; /* Green text */
+}
+
+.flatpickr-calendar .flatpickr-time .numInput {
+  color: #427859; /* Time input text */
+  border: 1px solid #427859; /* Green border for time input */
+}
+
+.flatpickr-calendar .flatpickr-time .flatpickr-hour:hover,
+.flatpickr-calendar .flatpickr-time .flatpickr-minute:hover {
+  background-color: #427859; /* Green background on hover */
+  color: #ffffff; /* White text */
+}
+
 /* General styling for the body */
 body {
   font-family: 'Arial', sans-serif;
