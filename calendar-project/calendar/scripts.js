@@ -17,7 +17,7 @@ form.addEventListener('submit', async (event) => {
   };
 
   try {
-    const response = await fetch('https://hooks.zapier.com/hooks/catch/20946687/2sbm12t/', {
+    const response = await fetch('/.netlify/functions/submit-refund', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,15 +27,14 @@ form.addEventListener('submit', async (event) => {
 
     if (response.ok) {
       const result = await response.json();
-      document.querySelector('.success').textContent = 'Data sent successfully!';
-      console.log('Success:', result);
+      alert('Data sent successfully!');
     } else {
       const error = await response.text();
-      document.querySelector('.error').textContent = 'An error occurred. Please try again.';
       console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   } catch (error) {
     console.error('Fetch Error:', error);
-    document.querySelector('.error').textContent = 'An error occurred. Please try again.';
+    alert('An error occurred. Please try again.');
   }
 });
