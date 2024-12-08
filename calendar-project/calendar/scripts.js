@@ -1,28 +1,36 @@
-const API_KEY = "VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy";
+// Handle the "Send Date and Time" button click
+async function handleSend() {
+  const datetime = document.getElementById("datetime").value;
 
-const interact = (request) => {
-    const username = document.getElementById("name").value;
-    return fetch(`https://general-runtime.voiceflow.com/state/user/${encodeURI(username)}/interact`, {
-        method: "POST",
-        headers: { Authorization: API_KEY, "Content-Type": "application/json" },
-        body: JSON.stringify({ request }),
-    })
-    .then((res) => res.json())
-    .then((trace) => {
-        const root = document.getElementById("root");
-        trace.forEach((item) => {
-            if (item.type === "speak" || item.type === "text") {
-                root.innerHTML += `<li>${item.payload.message}</li>`;
-            }
-        });
+  // Check if the field is filled
+  if (!datetime) {
+    alert("Please select a date and time.");
+    return;
+  }
+
+  try {
+    // Send the data to the backend (Netlify function)
+    const response = await fetch("/.netlify/functions/calendar-handler", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ datetime }),
     });
-};
 
-document.getElementById("send-datetime").addEventListener("click", () => {
-    const datetime = document.getElementById("datetime").value;
-    if (!datetime) {
-        alert("Please select a date and time.");
-        return;
+    const result = await response.json();
+
+    // Display the response
+    const responseList = document.getElementById("response");
+    if (response.ok) {
+      responseList.innerHTML += `<li>${result.message}</li>`;
+    } else {
+      responseList.innerHTML += `<li>Error: ${result.error}</li>`;
     }
-    interact({ type: "text", payload: `Selected date and time: ${datetime}` });
-});
+  } catch (error) {
+    console.error("Error:", error);
+    const responseList = document.getElementById("response");
+    responseList.innerHTML += `<li>Error sending data</li>`;
+  }
+}
+
+// Register the event listener
+document.getElementById("send").addEventListener("click", handleSend);
