@@ -18,7 +18,7 @@ document.getElementById("calendar-form").addEventListener("submit", function (ev
   }
 
   // Send selected date and time to Netlify serverless function
-  fetch('/.netlify/functions/calendar-handler', {
+  fetch('/calendar-project/functions/calendar-handler.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ datetime: selectedDateTime }),
