@@ -1,7 +1,7 @@
 /* General styling for the body */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #faf6f2; /* Soft beige background */
+  background-color: #ffffff; /* White background */
   color: #333; /* Dark text for contrast */
   margin: 0;
   padding: 0;
@@ -20,20 +20,22 @@ form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
+  border: 2px solid #427859; /* Border matches brand green */
 }
 
 /* Title styling */
 h1 {
-  color: #d4a373; /* Branded golden brown */
+  color: #427859; /* Branded green */
   text-align: center;
   margin-bottom: 20px;
+  font-size: 24px;
 }
 
 /* Form labels */
 label {
   font-size: 14px;
   font-weight: bold;
-  color: #5f4639; /* Branded coffee-brown */
+  color: #427859; /* Branded green */
   margin-bottom: 5px;
   display: block;
 }
@@ -49,9 +51,15 @@ input, textarea, select {
   color: #333;
 }
 
+/* Date and time picker input styling */
+input[type="datetime-local"] {
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
 /* Submit button styling */
 button {
-  background-color: #d4a373; /* Branded golden brown */
+  background-color: #427859; /* Branded green */
   color: #ffffff;
   padding: 10px 15px;
   border: none;
@@ -63,18 +71,12 @@ button {
 }
 
 button:hover {
-  background-color: #b38558; /* Darker shade for hover */
-}
-
-/* Date and time picker input styling */
-input[type="datetime-local"] {
-  padding: 8px 10px;
-  font-size: 14px;
+  background-color: #376a4f; /* Darker green for hover */
 }
 
 /* Success or error messages */
 .success {
-  color: #4caf50; /* Green for success */
+  color: #427859; /* Green for success */
   font-size: 14px;
   margin-top: 10px;
 }
