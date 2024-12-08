@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Date and Time Picker</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <h1>Date and Time Picker with Voiceflow Integration</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date and Time Picker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Date and Time Picker</h1>
+  <form id="picker-form">
+    <label for="name">Name:</label>
+    <input id="name" type="text" placeholder="Enter your name" required>
 
-    <div class="form-container">
-      <label for="datetime">Select Date and Time:</label>
-      <input id="datetime" name="datetime" type="datetime-local" />
+    <label for="location">Location:</label>
+    <input id="location" type="text" placeholder="Enter your location" required>
 
-      <button id="send" type="button">Send Date and Time</button>
-    </div>
+    <label for="order-number">Order Number:</label>
+    <input id="order-number" type="text" placeholder="Enter your order number" required>
 
-    <ul id="response"></ul>
+    <label for="refund-reason">Refund Reason:</label>
+    <textarea id="refund-reason" placeholder="Explain refund reason" required></textarea>
 
-    <script src="scripts.js"></script>
-  </body>
+    <label for="datetime">Select Date and Time:</label>
+    <input id="datetime" type="datetime-local" required>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script src="scripts.js"></script>
+</body>
 </html>
