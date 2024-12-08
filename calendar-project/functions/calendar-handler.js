@@ -18,7 +18,7 @@ exports.handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy',
+        'Authorization': 'Bearer VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy',
       },
       body: JSON.stringify({
         state: {}, 
