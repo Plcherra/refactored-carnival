@@ -1,41 +1,96 @@
+/* General styling for the body */
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #faf6f2; /* Soft beige background */
+  color: #333; /* Dark text for contrast */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
+
+/* Center the form */
+form {
+  background: #ffffff; /* White background for form */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Title styling */
 h1 {
+  color: #d4a373; /* Branded golden brown */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form labels */
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #5f4639; /* Branded coffee-brown */
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Input fields styling */
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
   color: #333;
 }
-form {
-  display: inline-block;
-  text-align: left;
-  max-width: 400px;
-  width: 100%;
-}
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-input, textarea, button {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
-  font-size: 16px;
-}
-textarea {
-  height: 100px;
-}
+
+/* Submit button styling */
 button {
-  background-color: #007bff;
-  color: white;
+  background-color: #d4a373; /* Branded golden brown */
+  color: #ffffff;
+  padding: 10px 15px;
   border: none;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
 }
+
 button:hover {
-  background-color: #0056b3;
+  background-color: #b38558; /* Darker shade for hover */
 }
-#status {
-  margin-top: 20px;
-  color: green;
+
+/* Date and time picker input styling */
+input[type="datetime-local"] {
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* Success or error messages */
+.success {
+  color: #4caf50; /* Green for success */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.error {
+  color: #f44336; /* Red for error */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  form {
+    padding: 15px;
+  }
+  button {
+    font-size: 14px;
+  }
 }
