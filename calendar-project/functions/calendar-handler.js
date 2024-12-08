@@ -8,17 +8,27 @@ exports.handler = async (event) => {
       };
     }
 
+    // Log the request payload before sending it
+    console.log("Request payload:", {
+      state: {},
+      action: { type: "text", payload: datetime },
+    });
+
     const response = await fetch('https://api.voiceflow.com/v1/project/6749c2ab4e1b0393839657d7/state/user/production/interact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer VF.DM.6749c5dda5a9ece76fd9d888.biKhIpaPvRpnMH1u',
+        Authorization: 'Bearer VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy',
       },
       body: JSON.stringify({
         state: {}, 
         action: { type: 'text', payload: datetime },
       }),
     });
+
+    // Log the response status and body after receiving it
+    console.log("Response status:", response.status);
+    console.log("Response body:", await response.text());
 
     if (!response.ok) {
       throw new Error(`Voiceflow API error: ${response.statusText}`);
@@ -37,6 +47,3 @@ exports.handler = async (event) => {
     };
   }
 };
-
-
-
