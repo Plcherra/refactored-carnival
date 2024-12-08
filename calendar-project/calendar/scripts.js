@@ -17,7 +17,7 @@ form.addEventListener('submit', async (event) => {
   };
 
   try {
-    const response = await fetch('https://hooks.zapier.com/hooks/catch/XXXXXXX/YYYYYY', {
+    const response = await fetch('https://hooks.zapier.com/hooks/catch/20946687/2sbm12t/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
