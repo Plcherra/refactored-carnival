@@ -1,40 +1,28 @@
-// Initialize the Flatpickr date and time picker
-flatpickr("#date-time-picker", {
-  enableTime: true,
-  dateFormat: "Y-m-d H:i",
-  time_24hr: true,
-  minDate: null,
-});
+const API_KEY = "VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy";
 
-// Handle the form submission
-document.getElementById("calendar-form").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent default form submission
-
-  const selectedDateTime = document.getElementById("date-time-picker").value;
-
-  if (!selectedDateTime) {
-    alert("Please select a date and time!");
-    return;
-  }
-
-  // Send selected date and time to Netlify serverless function
-  fetch('/calendar-project/functions/calendar-handler.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ datetime: selectedDateTime }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+const interact = (request) => {
+    const username = document.getElementById("name").value;
+    return fetch(`https://general-runtime.voiceflow.com/state/user/${encodeURI(username)}/interact`, {
+        method: "POST",
+        headers: { Authorization: API_KEY, "Content-Type": "application/json" },
+        body: JSON.stringify({ request }),
     })
-    .then((data) => {
-      alert("Date and time sent successfully!");
-      console.log(data);
-    })
-    .catch((error) => {
-      console.error("Error sending date and time:", error);
-      alert("Error submitting the date/time. Please try again.");
+    .then((res) => res.json())
+    .then((trace) => {
+        const root = document.getElementById("root");
+        trace.forEach((item) => {
+            if (item.type === "speak" || item.type === "text") {
+                root.innerHTML += `<li>${item.payload.message}</li>`;
+            }
+        });
     });
+};
+
+document.getElementById("send-datetime").addEventListener("click", () => {
+    const datetime = document.getElementById("datetime").value;
+    if (!datetime) {
+        alert("Please select a date and time.");
+        return;
+    }
+    interact({ type: "text", payload: `Selected date and time: ${datetime}` });
 });
