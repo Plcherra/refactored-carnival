@@ -1,6 +1,7 @@
 exports.handler = async (event) => {
   try {
     const { datetime } = JSON.parse(event.body);
+
     if (!datetime) {
       return {
         statusCode: 400,
@@ -8,7 +9,9 @@ exports.handler = async (event) => {
       };
     }
 
-    // Log the request payload before sending it
+    // API key securely handled in the backend
+    const API_KEY = "VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy"; // Keep this private!
+
     console.log("Request payload:", {
       state: {},
       action: { type: "text", payload: datetime },
@@ -18,17 +21,13 @@ exports.handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer VF.DM.6755293d4c417aab5a71cfd4.kCBxTlEqYBJpKFZy',
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        state: {}, 
+        state: {},
         action: { type: 'text', payload: datetime },
       }),
     });
-
-    // Log the response status and body after receiving it
-    console.log("Response status:", response.status);
-    console.log("Response body:", await response.text());
 
     if (!response.ok) {
       throw new Error(`Voiceflow API error: ${response.statusText}`);
