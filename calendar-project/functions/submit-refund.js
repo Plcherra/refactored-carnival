@@ -22,7 +22,7 @@ exports.handler = async (event) => {
     }
 
     // Zapier webhook URL
-    const zapierWebhookURL = 'https://hooks.zapier.com/hooks/catch/XXXXXXX/YYYYYY';
+    const zapierWebhookURL = 'https://hooks.zapier.com/hooks/catch/20946687/2sbm12t/';
 
     // Send the data to Zapier
     const response = await fetch(zapierWebhookURL, {
