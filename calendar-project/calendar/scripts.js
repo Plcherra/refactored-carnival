@@ -1,5 +1,5 @@
 // Replace with your Zapier Webhook URL
-const zapierWebhookURL = "https://hooks.zapier.com/hooks/catch/your_zap_id/";
+const zapierWebhookURL = "https://hooks.zapier.com/hooks/catch/20946687/2sbm12t/";
 
 document.getElementById("picker-form").addEventListener("submit", async (event) => {
   event.preventDefault();
