@@ -1,0 +1,3 @@
+[build]
+publish = "calendar"         # Path to the static files directory (relative to root)
+functions = "functions"      # Path to the functions directory (relative to root)
