@@ -1,52 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Flatpickr on the date-time input
-  flatpickr("#datetime", {
-    enableTime: true,
-    dateFormat: "m/d/Y, h:i K",
-    time_24hr: false,
-    wrap: true,
-    theme: "custom", // Ensure your CSS styles this theme
-  });
+const form = document.getElementById('picker-form');
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
 
-  // Attach form submission handler
-  const form = document.getElementById('picker-form');
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  const name = document.getElementById('name').value;
+  const location = document.getElementById('location').value;
+  const orderNumber = document.getElementById('order-number').value;
+  const refundReason = document.getElementById('refund-reason').value;
+  const dateTime = document.getElementById('datetime').value;
 
-    const name = document.getElementById('name').value;
-    const location = document.getElementById('location').value;
-    const orderNumber = document.getElementById('order-number').value;
-    const refundReason = document.getElementById('refund-reason').value;
-    const dateTime = document.getElementById('datetime').value;
+  const data = {
+    name,
+    location,
+    order_numbern: orderNumber,
+    refund_reason: refundReason,
+    order_date_time: dateTime,
+  };
 
-    const data = {
-      name,
-      location,
-      order_numbern: orderNumber,
-      refund_reason: refundReason,
-      order_date_time: dateTime,
-    };
+  try {
+    const response = await fetch('https://hooks.zapier.com/hooks/catch/XXXXXXX/YYYYYY', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-    try {
-      const response = await fetch('/.netlify/functions/submit-refund', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        alert('Data sent successfully!');
-      } else {
-        const error = await response.text();
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    } catch (error) {
-      console.error('Fetch Error:', error);
-      alert('An error occurred. Please try again.');
+    if (response.ok) {
+      const result = await response.json();
+      document.querySelector('.success').textContent = 'Data sent successfully!';
+      console.log('Success:', result);
+    } else {
+      const error = await response.text();
+      document.querySelector('.error').textContent = 'An error occurred. Please try again.';
+      console.error('Error:', error);
     }
-  });
+  } catch (error) {
+    console.error('Fetch Error:', error);
+    document.querySelector('.error').textContent = 'An error occurred. Please try again.';
+  }
 });
